@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import fondoHospital from "../assets/fondo-hospital.png";
 import Form from "./Form";
 
@@ -20,3 +19,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
