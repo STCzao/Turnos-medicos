@@ -7,6 +7,9 @@ const Form = () => {
   const [medico, setMedico] = React.useState("Médico");
   const [isMedicoOpen, setIsMedicoOpen] = useState(false);
 
+  const [nombre, setNombre] = useState("");
+  const [fecha, setFecha] = useState("");
+
   const especialidades = [
     "Gastroenterología",
     "Cardiología",
@@ -40,9 +43,44 @@ const Form = () => {
     setIsMedicoOpen(false);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      nombre.trim() === "" ||
+      especialidad === "Especialidad" ||
+      medico === "Médico" ||
+      fecha === ""
+    ) {
+      alert("Por favor, completá todos los campos");
+      return;
+    }
+    setTimeout(() => {
+      alert("Turno registrado correctamente");
+
+      setNombre("");
+      setEspecialidad("Especialidad");
+      setMedico("Médico");
+      setFecha("");
+    }, 1000);
+  };
+
   return (
     <div>
       <form className="bg-white text-gray-500 rounded-lg px-6 py-4 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto">
+        {/* Nombre completo */}
+
+        <div className="relative">
+          <div>{"Nombre y apellido"}</div>
+          <input
+            type="text"
+            className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none w-full cursor-pointer"
+            placeholder="Nombre completo"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+          />
+        </div>
+
         {/* Especialidad */}
 
         <div className="relative">
@@ -55,7 +93,6 @@ const Form = () => {
             onClick={() => setIsEspecialidadOpen(!isEspecialidadOpen)}
             required
           />
-
           {/* Cuando una persona realiza un click en el Input setIsEspecialidadOpen 
           invoca el valor de IsEspecialidadOpen que en este caso es el 
           contrario del inicial(cambia de false a true)*/}
@@ -122,15 +159,20 @@ const Form = () => {
           {"Fecha del turno"}
           <input
             id="fecha"
+            value={fecha}
             type="date"
             className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none w-full cursor-pointer"
-            required
+            onChange={(e) => setFecha(e.target.value)}
           />
         </div>
 
         {/* Horario a seleccionar */}
 
-        <button className="flex items-center justify-center gap-1 rounded-md bg-black py-3 px-4 text-white my-auto cursor-pointer max-md:w-full max-md:py-1">
+        <button
+          className="flex items-center justify-center gap-1 rounded-md bg-black py-3 px-4 text-white my-auto cursor-pointer max-md:w-full max-md:py-1"
+          type="submit"
+          onClick={handleSubmit}
+        >
           <span>Guardar</span>
         </button>
       </form>
