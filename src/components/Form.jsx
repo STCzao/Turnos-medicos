@@ -1,13 +1,11 @@
 import React from "react";
 import { useState } from "react";
 
-const Especialidad = () => {
+const Form = () => {
   const [especialidad, setEspecialidad] = useState("Especialidad");
   const [isEspecialidadOpen, setIsEspecialidadOpen] = useState(false);
   const [medico, setMedico] = React.useState("Médico");
   const [isMedicoOpen, setIsMedicoOpen] = useState(false);
-  const [horario, setHorario] = useState("Horario");
-  const [isHorarioOpen, setIsHorarioOpen] = useState(false);
 
   const especialidades = [
     "Gastroenterología",
@@ -32,17 +30,6 @@ const Especialidad = () => {
     Endocrinología: ["Dr. Ariel Sosa", "Dra. Natalia Vega"],
   };
 
-  const horariosDisponibles = [
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-  ];
-
   const handleSelectEspecialidad = (especialidadSeleccionada) => {
     setEspecialidad(especialidadSeleccionada);
     setIsEspecialidadOpen(false);
@@ -51,11 +38,6 @@ const Especialidad = () => {
   const handleSelectMedico = (medicoSeleccionado) => {
     setMedico(medicoSeleccionado);
     setIsMedicoOpen(false);
-  };
-
-  const handleSelectHorario = (horarioSeleccionado) => {
-    setHorario(horarioSeleccionado);
-    setIsHorarioOpen(false);
   };
 
   return (
@@ -71,6 +53,7 @@ const Especialidad = () => {
             placeholder="Selecciona una especialidad"
             className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none w-full cursor-pointer"
             onClick={() => setIsEspecialidadOpen(!isEspecialidadOpen)}
+            required
           />
 
           {/* Cuando una persona realiza un click en el Input setIsEspecialidadOpen 
@@ -107,6 +90,7 @@ const Especialidad = () => {
               placeholder="Selecciona un médico"
               className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none w-full cursor-pointer"
               onClick={() => setIsMedicoOpen(!isMedicoOpen)}
+              required
             />
 
             {/* Como en el apartado de Especialidad, primero capturamos la accion con un evento OnClick 
@@ -140,36 +124,11 @@ const Especialidad = () => {
             id="fecha"
             type="date"
             className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none w-full cursor-pointer"
+            required
           />
         </div>
 
         {/* Horario a seleccionar */}
-
-        <div className="relative">
-          <div>{"Horario"}</div>
-          <input
-            readOnly
-            value={horario === "Horario" ? "" : horario}
-            placeholder="Seleccioona un horario"
-            className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none w-full cursor-pointer"
-            onClick={() => setIsHorarioOpen(!isHorarioOpen)}
-          />
-          {isHorarioOpen && (
-            <ul className="absolute z-10 w-full bg-white border border-gray-200 rounded mt-1 max-h-48 overflow-auto shadow-sm">
-              {horariosDisponibles.map((h) => (
-                <li
-                  key={h}
-                  onClick={() => handleSelectHorario(h)}
-                  className="px-3 py-2 hover:bg-indigo-500 hover:text-white cursor-pointer"
-                >
-                  {h}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {/* Este bloque de codigo funciona de manera similar a los anteriores */}
 
         <button className="flex items-center justify-center gap-1 rounded-md bg-black py-3 px-4 text-white my-auto cursor-pointer max-md:w-full max-md:py-1">
           <span>Guardar</span>
@@ -179,4 +138,4 @@ const Especialidad = () => {
   );
 };
 
-export default Especialidad;
+export default Form;

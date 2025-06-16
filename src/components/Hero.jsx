@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import fondoHospital from "../assets/fondo-hospital.png";
-import Especialidad from "./Especialidad";
+import Form from "./Form";
 
 const Hero = () => {
 
@@ -14,7 +14,7 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Especialidad/>
+      <Form/>
     </div>
   );
 };
