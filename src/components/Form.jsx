@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
-const Form = () => {
+const Form = ({ onAgregarTurno, turnoEditando }) => {
   const [especialidad, setEspecialidad] = useState("Especialidad");
   const [isEspecialidadOpen, setIsEspecialidadOpen] = useState(false);
   const [medico, setMedico] = React.useState("Médico");
   const [isMedicoOpen, setIsMedicoOpen] = useState(false);
-
   const [nombre, setNombre] = useState("");
   const [fecha, setFecha] = useState("");
+
+  useEffect(() => {
+    if (turnoEditando) {
+      setNombre(turnoEditando.nombre);
+      setEspecialidad(turnoEditando.especialidad);
+      setMedico(turnoEditando.medico);
+      setFecha(turnoEditando.fecha);
+    }
+  }, [turnoEditando]);
 
   const especialidades = [
     "Gastroenterología",
@@ -55,19 +63,20 @@ const Form = () => {
       alert("Por favor, completá todos los campos");
       return;
     }
-    setTimeout(() => {
-      alert("Turno registrado correctamente");
 
-      setNombre("");
-      setEspecialidad("Especialidad");
-      setMedico("Médico");
-      setFecha("");
-    }, 1000);
+    onAgregarTurno({ nombre, especialidad, medico, fecha });
+
+    setNombre("");
+    setEspecialidad("Especialidad");
+    setMedico("Médico");
+    setFecha("");
   };
 
   return (
     <div>
-      <form className="bg-white text-gray-500 rounded-lg px-6 py-4 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto">
+      <form
+        className="bg-white text-gray-500 rounded-lg px-6 py-4 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto"
+      >
         {/* Nombre completo */}
 
         <div className="relative">
@@ -171,9 +180,9 @@ const Form = () => {
         <button
           className="flex items-center justify-center gap-1 rounded-md bg-black py-3 px-4 text-white my-auto cursor-pointer max-md:w-full max-md:py-1"
           type="submit"
-          onClick={handleSubmit}
+           onSubmit={handleSubmit}
         >
-          <span>Guardar</span>
+          {turnoEditando ? "Actualizar" : "Guardar"}
         </button>
       </form>
     </div>
