@@ -8,7 +8,7 @@ const Hero = () => {
   const [turnoEditando, setTurnoEditando] = useState(null);
 
   const agregarTurno = (nuevoTurno) => {
-    const duplicado = TablaTurnos.some(
+    const duplicado = turnos.some(
       (t, i) =>
         i !== turnoEditando?.index &&
         t.fecha === nuevoTurno.fecha &&
@@ -16,7 +16,7 @@ const Hero = () => {
     );
 
     if (duplicado) {
-      alert("Ya existe un turno para ese médico en esa fecha");
+      alert("Ya existe un turno para ese médico en esta fecha");
       return;
     }
 
@@ -38,12 +38,12 @@ const Hero = () => {
 
   const editarTurno = (index) => {
     const turno = turnos[index];
-    setTurnoEditando([...turno, index]);
+    setTurnoEditando({ ...turno, index });
   };
 
   return (
     <div
-      className="min-h-screen w-full"
+      className="min-h-screen w-full flex items-center justify-center"
       style={{
         backgroundImage: `url(${fondoHospital})`,
         backgroundSize: "cover",
@@ -51,13 +51,15 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3">
         <Form onAgregarTurno={agregarTurno} turnoEditando={turnoEditando} />
-        <TablaTurnos
+        <div className="overflow-x-auto w-full">
+          <TablaTurnos
           turnos={turnos}
           onEliminar={eliminarTurno}
           onEditar={editarTurno}
         />
+        </div>
       </div>
     </div>
   );
