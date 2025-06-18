@@ -22,7 +22,7 @@ const Form = ({ onAgregarTurno, turnoEditando }) => {
     "Gastroenterología",
     "Cardiología",
     "Dermatología",
-    "Clínica Médica",
+    "Clínica",
     "Oftalmología",
     "Neumonología",
     "Pediatría",
@@ -73,8 +73,9 @@ const Form = ({ onAgregarTurno, turnoEditando }) => {
   };
 
   return (
-    <div>
+    <div className="flex items-center justify-center px-4">
       <form
+        onSubmit={handleSubmit}
         className="bg-white text-gray-500 rounded-lg px-6 py-4 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto"
       >
         {/* Nombre completo */}
@@ -180,9 +181,8 @@ const Form = ({ onAgregarTurno, turnoEditando }) => {
         <button
           className="flex items-center justify-center gap-1 rounded-md bg-black py-3 px-4 text-white my-auto cursor-pointer max-md:w-full max-md:py-1"
           type="submit"
-           onSubmit={handleSubmit}
         >
-          {turnoEditando ? "Actualizar" : "Guardar"}
+          {turnoEditando ? "Aceptar" : "Agregar"}
         </button>
       </form>
     </div>
