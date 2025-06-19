@@ -1,5 +1,5 @@
 import { useState } from "react";
-import fondoHospital from "../assets/fondo-hospital.png";
+import fondoHospital from "../assets/fondoHospital.png";
 import Form from "./Form";
 import TablaTurnos from "./TablaTurnos";
 
