@@ -9,6 +9,14 @@ const Form = ({ onAgregarTurno, turnoEditando }) => {
   const [nombre, setNombre] = useState("");
   const [fecha, setFecha] = useState("");
 
+  const minDay = () => {
+    const today = new Date();
+
+    return today.toISOString().split("T")[0];
+  };
+
+  const todayString = minDay();
+
   useEffect(() => {
     if (turnoEditando) {
       setNombre(turnoEditando.nombre);
@@ -61,6 +69,17 @@ const Form = ({ onAgregarTurno, turnoEditando }) => {
       fecha === ""
     ) {
       alert("Por favor, completá todos los campos");
+      return;
+    }
+
+    const selectedDate = new Date(fecha);
+    const currentDate = new Date(todayString);
+
+    selectedDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < currentDate) {
+      alert("Por favor, ingresa una fecha futura");
       return;
     }
 
@@ -173,6 +192,7 @@ const Form = ({ onAgregarTurno, turnoEditando }) => {
             type="date"
             className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none w-full cursor-pointer"
             onChange={(e) => setFecha(e.target.value)}
+            min={todayString}
           />
         </div>
 

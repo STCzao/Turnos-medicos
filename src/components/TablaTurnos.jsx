@@ -1,6 +1,7 @@
 import React from "react";
 
 const TablaTurnos = ({ turnos, onEliminar, onEditar }) => {
+
   return (
     <div className="w-full overflow-x-auto rounded-lg shadow-md bg-white">
       <table className="min-w-[700px] w-full text-gray-700">
@@ -46,6 +47,7 @@ const TablaTurnos = ({ turnos, onEliminar, onEditar }) => {
                   >
                     Editar
                   </button>
+
                   <button
                     className="flex gap-1 rounded-md bg-red-500 py-2 px-3 text-white text-sm transition hover:bg-red-700"
                     onClick={() => onEliminar(i)}
